@@ -1,7 +1,13 @@
 <template>
-  <b-list-group>
-    <airline-item v-for="item in items" :key="item.iata" :airline="item" />
-  </b-list-group>
+  <ApolloQuery :query="require('../graphql/Airlines.gql')">
+    <template slot-scope="{ result: { loading, error, data } }">
+      <div v-if="loading" class="loading apollo">Loading...</div>
+      <div v-else-if="error" class="error apollo">An error occured</div>
+      <b-list-group v-else-if="data">
+        <airline-item v-for="airline in data.airlines" :key="airline.iata" :airline="airline" />
+      </b-list-group>
+    </template>
+  </ApolloQuery>
 </template>
 
 <script>
@@ -12,50 +18,7 @@ export default {
     AirlineItem,
   },
   data() {
-    return {
-      items: [
-        {
-          iata: 'VY',
-          name: 'Vueling',
-          primary_color: '#fc0',
-          secondary_color: '#666',
-          services: [
-            {
-              key: 'bags',
-              value: false,
-            },
-            {
-              key: 'checkin',
-              value: true,
-            },
-            {
-              key: 'seats',
-              value: true,
-            },
-          ],
-        },
-        {
-          iata: 'FR',
-          name: 'Ryanair',
-          primary_color: '#133590',
-          secondary_color: '#f1c931',
-          services: [
-            {
-              key: 'bags',
-              value: true,
-            },
-            {
-              key: 'checkin',
-              value: true,
-            },
-            {
-              key: 'seats',
-              value: true,
-            },
-          ],
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>

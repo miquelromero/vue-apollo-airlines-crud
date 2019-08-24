@@ -46,9 +46,7 @@ export default {
       };
     },
     services() {
-      return this.airline.services
-        .filter(service => service.value === true)
-        .map(service => services[service.key]);
+      return this.airline.services.map(service => services[service]);
     },
   },
 };

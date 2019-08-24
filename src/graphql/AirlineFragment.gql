@@ -1,0 +1,7 @@
+fragment Airline on Airline {
+  iata
+  name
+  primary_color
+  secondary_color
+  services
+}
