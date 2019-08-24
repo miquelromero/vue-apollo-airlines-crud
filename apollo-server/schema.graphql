@@ -1,21 +1,12 @@
-"Included scalars"
-scalar JSON
-scalar Upload
-
-
+type Airline {
+  iata: ID!
+  name: String
+  primary_color: String
+  secondary_color: String
+  services: [String]
+}
 
 type Query {
   "Test query with a parameter"
-  hello(name: String): String!
-
-}
-
-type Mutation {
-  myMutation: String!
-
-}
-
-type Subscription {
-  mySub: String!
-
+  airlines: [Airline]
 }
