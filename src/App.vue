@@ -8,7 +8,8 @@
             <b-dropdown-item
               href="#"
               v-for="lang in langs"
-              :key="lang" @click="changeLanguage(lang)"
+              :key="lang"
+              @click="changeLanguage(lang)"
             >
               {{ lang.toLocaleUpperCase() }}
             </b-dropdown-item>
@@ -17,7 +18,7 @@
       </b-collapse>
     </b-navbar>
     <b-container fluid>
-      <router-view/>
+      <router-view />
     </b-container>
   </div>
 </template>
@@ -32,17 +33,13 @@ export default {
     };
   },
   computed: {
-    ...mapState([
-      'lang',
-    ]),
+    ...mapState(['lang']),
   },
   created() {
     this.changeLanguage(this.lang);
   },
   methods: {
-    ...mapMutations([
-      'setLanguage',
-    ]),
+    ...mapMutations(['setLanguage']),
     changeLanguage(lang) {
       this.$i18n.locale = lang;
       this.setLanguage(lang);
@@ -51,5 +48,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
