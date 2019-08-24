@@ -6,12 +6,19 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "apollo": "vue-cli-service apollo:dev --generate-schema",
+    "apollo:schema:generate": "vue-cli-service apollo:schema:generate",
+    "apollo:schema:publish": "vue-cli-service apollo:schema:publish",
+    "apollo:start": "vue-cli-service apollo:start",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "graphql-type-json": "^0.2.1",
     "vue": "^2.6.10",
+    "vue-apollo": "^3.0.0-beta.11",
+    "vue-cli-plugin-apollo": "^0.21.0",
     "vue-router": "^3.0.3"
   },
   "devDependencies": {
@@ -26,7 +33,9 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "eslint": "^5.16.0",
+    "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "graphql-tag": "^2.9.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
