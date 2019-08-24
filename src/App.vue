@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar type="dark" variant="primary">
+    <b-navbar>
       <b-navbar-brand :to="{ name: 'home' }">{{ $t('title') }}</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
@@ -17,7 +17,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <b-container fluid>
+    <b-container>
       <router-view />
     </b-container>
   </div>
