@@ -8,7 +8,7 @@
       :variables="{
         input: creationFormData,
       }"
-      @done="closeModal"
+      @done="onCreated"
     >
       <template slot-scope="{ mutate }">
         <b-modal @hidden="closeModal" :visible="isCreating" :title="$t('crud.modalCreateTitle')">
@@ -61,6 +61,15 @@ export default {
   methods: {
     closeModal() {
       this.$router.push({ name: 'airlines' });
+    },
+    onCreated() {
+      this.$bvToast.toast(this.$t('crud.creationSuccess'), {
+        title: this.$t('crud.successTitle'),
+        toaster: 'b-toaster-bottom-center',
+        variant: 'success',
+        solid: true,
+      });
+      this.closeModal();
     },
   },
 };

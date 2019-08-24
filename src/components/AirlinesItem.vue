@@ -69,5 +69,8 @@ export default {
       }
     }
   }
+  &:hover {
+    filter: brightness(1.2);
+  }
 }
 </style>

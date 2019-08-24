@@ -3,7 +3,10 @@
   "crud": {
     "createButton": "Create",
     "modalCreateTitle": "Create",
-    "modalEditTitle": "Edit"
+    "modalEditTitle": "Edit",
+    "successTitle": "Success!",
+    "creationSuccess": "Item has been created successfuly",
+    "editionSuccess": "Item has been updated successfuly"
   },
   "airlines": {
     "form": {
