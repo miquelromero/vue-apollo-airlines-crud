@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar>
-      <b-navbar-brand :to="{ name: 'home' }">{{ $t('title') }}</b-navbar-brand>
+      <b-navbar-brand :to="{ name: 'airlines' }">{{ $t('title') }}</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown :text="this.lang.toLocaleUpperCase()" right>

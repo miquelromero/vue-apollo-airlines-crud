@@ -1,3 +1,28 @@
 {
-  "title": "Airlines manager"
+  "title": "Airlines manager",
+  "crud": {
+    "createButton": "Create",
+    "modalCreateTitle": "Create",
+    "modalEditTitle": "Edit"
+  },
+  "airlines": {
+    "form": {
+      "iata": {
+        "label": "IATA",
+        "placeholder": "VY"
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Vueling"
+      },
+      "primaryColor": {
+        "label": "Primary color",
+        "placeholder": "#000000"
+      },
+      "secondaryColor": {
+        "label": "Secondary color",
+        "placeholder": "#ffffff"
+      }
+    }
+  }
 }

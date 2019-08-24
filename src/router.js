@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import AirlineCrud from './views/AirlineCrud.vue';
+import AirlinesCrud from './views/AirlinesCrud.vue';
 
 Vue.use(Router);
 
@@ -10,8 +10,24 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: AirlineCrud,
+      name: 'airlines',
+      component: AirlinesCrud,
+    },
+    {
+      path: '/create',
+      name: 'airlines-create',
+      component: AirlinesCrud,
+      props: {
+        isCreating: true,
+      },
+    },
+    {
+      path: '/edit/:id',
+      name: 'airlines-edit',
+      component: AirlinesCrud,
+      props: {
+        isEditing: true,
+      },
     },
   ],
 });

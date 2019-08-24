@@ -1,4 +1,5 @@
 fragment Airline on Airline {
+  id
   iata
   name
   primary_color

@@ -1,12 +1,28 @@
+input AirlineInput {
+  iata: String!
+  name: String!
+  primary_color: String!
+  secondary_color: String!
+  services: [String]
+}
+
 type Airline {
-  iata: ID!
-  name: String
-  primary_color: String
-  secondary_color: String
+  id: ID!
+  iata: String!
+  name: String!
+  primary_color: String!
+  secondary_color: String!
   services: [String]
 }
 
 type Query {
-  "Test query with a parameter"
   airlines: [Airline]
+}
+
+type Mutation {
+  createAirline(input: AirlineInput!): Airline!
+}
+
+type Subscription {
+  airlineAdded: Airline!
 }

@@ -1,0 +1,7 @@
+#import "./AirlineFragment.gql"
+
+subscription airlineAdded {
+  airlineAdded {
+    ...Airline
+  }
+}

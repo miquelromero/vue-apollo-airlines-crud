@@ -1,24 +1,35 @@
 <template>
   <ApolloQuery :query="require('../graphql/Airlines.gql')">
+    <ApolloSubscribeToMore
+      :document="require('../graphql/AirlineAdded.gql')"
+      :update-query="onAirlineAdded"
+    />
     <template slot-scope="{ result: { loading, error, data } }">
-      <div v-if="loading" class="loading apollo">Loading...</div>
-      <div v-else-if="error" class="error apollo">An error occured</div>
+      <div v-if="loading">Loading...</div>
+      <div v-else-if="error">An error occured</div>
       <b-list-group v-else-if="data">
-        <airline-item v-for="airline in data.airlines" :key="airline.iata" :airline="airline" />
+        <airlines-item v-for="airline in data.airlines" :key="airline.id" :airline="airline" />
       </b-list-group>
     </template>
   </ApolloQuery>
 </template>
 
 <script>
-import AirlineItem from '@/components/AirlineItem.vue';
+import AirlinesItem from '@/components/AirlinesItem.vue';
 
 export default {
   components: {
-    AirlineItem,
+    AirlinesItem,
   },
   data() {
     return {};
+  },
+  methods: {
+    onAirlineAdded(previousResult, { subscriptionData }) {
+      return {
+        airlines: [...previousResult.airlines, subscriptionData.data.airlineAdded],
+      };
+    },
   },
 };
 </script>

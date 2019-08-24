@@ -1,17 +1,19 @@
 <template>
-  <b-list-group-item class="airline-item" :style="itemStyle">
-    <div class="airline-item__header">
-      {{ header }}
-      <div class="item__header__badges float-right">
-        <div
-          class="airline-item__header__badges__badge badge"
-          :style="badgeStyle"
-          v-for="service in services"
-          :key="service.key"
-        >
-          <font-awesome-icon :icon="service.icon" />
-        </div>
-      </div>
+  <b-list-group-item
+    :to="{ name: 'airlines-edit', params: { id: airline.id } }"
+    class="airline-item"
+    :style="itemStyle"
+  >
+    <span>{{ text }}</span>
+    <div class="airline-item__badges">
+      <b-badge
+        class="airline-item__badges__badge"
+        :style="badgeStyle"
+        v-for="service in services"
+        :key="service.key"
+      >
+        <font-awesome-icon :icon="service.icon" />
+      </b-badge>
     </div>
   </b-list-group-item>
 </template>
@@ -28,7 +30,7 @@ export default {
     },
   },
   computed: {
-    header() {
+    text() {
       return `${this.airline.iata} - ${this.airline.name}`;
     },
     itemStyle() {
@@ -54,13 +56,16 @@ export default {
 
 <style lang="scss">
 .airline-item {
-  &__header {
-    &__badges {
-      &__badge {
-        margin: 0 4px;
-        &:last-child {
-          margin-right: 0;
-        }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &__text {
+  }
+  &__badges {
+    &__badge {
+      margin: 0 4px;
+      &:last-child {
+        margin-right: 0;
       }
     }
   }

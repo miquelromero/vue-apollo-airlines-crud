@@ -1,0 +1,7 @@
+#import "./AirlineFragment.gql"
+
+mutation createAirline($input: AirlineInput!) {
+  createAirline(input: $input) {
+    ...Airline
+  }
+}
