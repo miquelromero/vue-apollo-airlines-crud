@@ -1,9 +1,14 @@
 <template>
   <b-row>
     <b-col md="4">
-      <b-button variant="primary" class="mt-3" block :to="{ name: 'airlines-create' }">{{
-        $t('crud.createButton')
-      }}</b-button>
+      <b-button
+        data-cy="button-create-airline"
+        variant="primary"
+        class="mt-3"
+        block
+        :to="{ name: 'airlines-create' }"
+        >{{ $t('crud.createButton') }}</b-button
+      >
       <b-form-input
         class="mt-3"
         id="search"

@@ -3,6 +3,7 @@
     <b-form-group :label="$t('airlines.form.iata.label')" label-for="IATA">
       <b-form-input
         id="iata"
+        data-cy="airlines-form-iata"
         v-model="form.iata"
         type="text"
         maxlength="2"
@@ -14,6 +15,7 @@
     <b-form-group :label="$t('airlines.form.name.label')" label-for="name">
       <b-form-input
         id="name"
+        data-cy="airlines-form-name"
         type="text"
         maxlength="50"
         v-model="form.name"
@@ -22,14 +24,31 @@
       />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.primaryColor.label')" label-for="primary_color">
-      <b-form-input id="primary_color" type="color" v-model="form.primary_color" required />
+      <b-form-input
+        data-cy="airlines-form-primary-color"
+        id="primary_color"
+        type="color"
+        v-model="form.primary_color"
+        required
+      />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.secondaryColor.label')" label-for="secondary_color">
-      <b-form-input id="secondary_color" type="color" v-model="form.secondary_color" required />
+      <b-form-input
+        data-cy="airlines-form-secondary-color"
+        id="secondary_color"
+        type="color"
+        v-model="form.secondary_color"
+        required
+      />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.services.label')">
       <b-form-checkbox-group id="services" v-model="form.services" name="services">
-        <b-form-checkbox v-for="service in services" :key="service.key" :value="service.key">
+        <b-form-checkbox
+          :data-cy="`airlines-form-service-${service.key}`"
+          v-for="service in services"
+          :key="service.key"
+          :value="service.key"
+        >
           {{ $t(`services.${service.key}`) }}
         </b-form-checkbox>
       </b-form-checkbox-group>

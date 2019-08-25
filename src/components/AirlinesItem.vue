@@ -1,15 +1,25 @@
 <template>
   <b-list-group-item
+    data-cy="airlines-list-item"
     :to="{ name: 'airlines-edit', params: { id: airline.id } }"
     class="airline-item"
     :style="itemStyle"
   >
     <div class="item__text">
-      <span class="airline-item__text__iata text-monospace">{{ airline.iata }}</span>
-      <span class="airline-item__text__name">{{ airline.name }}</span>
+      <span
+        data-cy="airlines-list-item-iata"
+        class="airline-item__text__iata text-monospace"
+        v-text="airline.iata"
+      ></span>
+      <span
+        data-cy="airlines-list-item-name"
+        class="airline-item__text__name"
+        v-text="airline.name"
+      ></span>
     </div>
-    <div class="airline-item__badges">
+    <div data-cy="airlines-list-item-badges" class="airline-item__badges">
       <b-badge
+        data-cy="airlines-list-item-badges-badge"
         class="airline-item__badges__badge"
         :style="badgeStyle"
         v-for="service in services"

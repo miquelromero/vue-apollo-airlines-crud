@@ -6,9 +6,19 @@ This is just a Vue.js + GraphQL crud for testing purposes. Includes both client 
 ```
 npm install
 ```
-In order to have everything up and running, you need to build and start both client and server. It can be done all together in development mode by running the following command:
+In order to have everything up and running in development mode, you need to build and start both client and server.
 ```
-npm run all
+npm run apollo
+npm run serve
+```
+
+Then you will have your server running at:
+```
+http://localhost:4000/graphql/
+```
+And your client at:
+```
+http://localhost:8080/
 ```
 
 ## Server
@@ -51,11 +61,13 @@ npm run lint
 ```
 
 ### Run your end-to-end tests
+Before running end-to-end tests you need to have apollo server running
 ```
 npm run test:e2e
 ```
 
 ### Run your unit tests
+No units yet
 ```
 npm run test:unit
 ```

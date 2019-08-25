@@ -29,7 +29,9 @@
       :visible="isCreating"
       :title="$t('crud.modalCreateTitle')"
     >
-      <airlines-form @change="formData = $event" @validate="validFormData = $event" />
+      <div data-cy="airlines-form-create-modal">
+        <airlines-form @change="formData = $event" @validate="validFormData = $event" />
+      </div>
       <template #modal-footer>
         <ApolloMutation
           v-if="isCreating"
@@ -42,6 +44,7 @@
         >
           <template slot-scope="{ mutate, loading }">
             <b-button
+              data-cy="airlines-form-create-button"
               variant="primary"
               :disabled="!validFormData || loading"
               @click="mutate"
@@ -63,15 +66,17 @@
       -->
       <template slot-scope="{ result: { loading, error, data }, isLoading }">
         <b-modal @hidden="closeModal" :visible="isEditing" :title="$t('crud.modalEditTitle')">
-          <div v-if="loading || isLoading" class="text-center">
-            <b-spinner label="Spinning"></b-spinner>
+          <div data-cy="airlines-form-edit-modal">
+            <div v-if="loading || isLoading" class="text-center">
+              <b-spinner label="Spinning"></b-spinner>
+            </div>
+            <airlines-form
+              v-if="data && data.airline"
+              :item="data.airline"
+              @change="formData = $event"
+              @validate="validFormData = $event"
+            />
           </div>
-          <airlines-form
-            v-if="data && data.airline"
-            :item="data.airline"
-            @change="formData = $event"
-            @validate="validFormData = $event"
-          />
           <template #modal-footer>
             <ApolloMutation
               :mutation="require('../graphql/DeleteAirline.gql')"
@@ -84,6 +89,7 @@
             >
               <template slot-scope="{ mutate, loading }">
                 <b-button
+                  data-cy="airlines-form-delete-button"
                   :disabled="!data || !data.airline || loading"
                   variant="danger"
                   @click="mutate"
@@ -102,6 +108,7 @@
             >
               <template slot-scope="{ mutate, loading }">
                 <b-button
+                  data-cy="airlines-form-edit-button"
                   variant="primary"
                   @click="mutate"
                   :disabled="!validFormData || loading"
