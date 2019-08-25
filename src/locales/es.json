@@ -1,3 +1,67 @@
 {
-  "title": "Gestor de aerolíneas"
+  "title": "Gestor de aerolíneas",
+  "crud": {
+    "createButton": "Crear",
+    "updateButton": "Actualizar",
+    "deleteButton": "Eliminar",
+    "modalCreateTitle": "Crear",
+    "modalEditTitle": "Editar",
+    "successToast": {
+      "title": "Perfecto!",
+      "text": {
+        "create": "El objeto se ha creado correctamente",
+        "update": "El objeto se ha actualizado correctamente",
+        "delete": "El objeto se ha eliminado correctamente"
+      }
+    },
+    "errorToast": {
+      "title": "Error!",
+      "text": {
+        "create": "El objeto no se puede crear ahora mismo",
+        "update": "El objeto no se puede actualizar ahora mismo",
+        "delete": "El objeto no se puede eliminar ahora mismo"
+      }
+    }
+  },
+  "airlines": {
+    "filters": {
+      "search": {
+        "placeholder": "Buscar"
+      },
+      "services": {
+        "header": "Filtrar por servicios",
+        "clear": "Quitar"
+      }
+    },
+    "form": {
+      "iata": {
+        "label": "IATA",
+        "placeholder": "VY"
+      },
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Vueling"
+      },
+      "primaryColor": {
+        "label": "Color primario"
+      },
+      "secondaryColor": {
+        "label": "Color secundario"
+      },
+      "services": {
+        "label": "Servicios"
+      },
+      "alerts": {
+        "updatedByOtherUser": "Los datos han sido actualizados por otra persona"
+      }
+    }
+  },
+  "services": {
+    "checkin": "Check in",
+    "seats": "Asientos",
+    "bags": "Maletas"
+  },
+  "errors": {
+    "generic": "Algo ha ido mal, por favor inténtelo más tarde"
+  }
 }

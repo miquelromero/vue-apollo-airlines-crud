@@ -1,3 +1,67 @@
 {
-  "title": "Gestor d'aerolínies"
+  "title": "Gestor d'aerolínies",
+  "crud": {
+    "createButton": "Crear",
+    "updateButton": "Actualitzar",
+    "deleteButton": "Eliminar",
+    "modalCreateTitle": "Crear",
+    "modalEditTitle": "Editar",
+    "successToast": {
+      "title": "Perfecte!",
+      "text": {
+        "create": "L'objecte s'ha creat correctament",
+        "update": "L'objecte s'ha actualitzat correctament",
+        "delete": "L'objecte s'ha eliminat correctament"
+      }
+    },
+    "errorToast": {
+      "title": "Error!",
+      "text": {
+        "create": "L'objecte no es pot crear ara mateix",
+        "update": "L'objecte no es pot actualitzar ara mateix",
+        "delete": "L'objecte no es pot eliminar ara mateix"
+      }
+    }
+  },
+  "airlines": {
+    "filters": {
+      "search": {
+        "placeholder": "Cercar"
+      },
+      "services": {
+        "header": "Filtrar per serveis",
+        "clear": "Neteja"
+      }
+    },
+    "form": {
+      "iata": {
+        "label": "IATA",
+        "placeholder": "VY"
+      },
+      "name": {
+        "label": "Nom",
+        "placeholder": "Vueling"
+      },
+      "primaryColor": {
+        "label": "Color primari"
+      },
+      "secondaryColor": {
+        "label": "Color secundari"
+      },
+      "services": {
+        "label": "Serveis"
+      },
+      "alerts": {
+        "updatedByOtherUser": "Les dades han sigut actualitzades per una altra persona"
+      }
+    }
+  },
+  "services": {
+    "checkin": "Check in",
+    "seats": "Seients",
+    "bags": "Maletes"
+  },
+  "errors": {
+    "generic": "Quelcom ha anat malament, sisplau intenta-ho més tard"
+  }
 }

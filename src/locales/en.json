@@ -29,7 +29,7 @@
         "placeholder": "Search"
       },
       "services": {
-        "header": "Filter by service",
+        "header": "Filter by services",
         "clear": "Clear filter"
       }
     },
@@ -43,12 +43,10 @@
         "placeholder": "Vueling"
       },
       "primaryColor": {
-        "label": "Primary color",
-        "placeholder": "#000000"
+        "label": "Primary color"
       },
       "secondaryColor": {
-        "label": "Secondary color",
-        "placeholder": "#ffffff"
+        "label": "Secondary color"
       },
       "services": {
         "label": "Services"

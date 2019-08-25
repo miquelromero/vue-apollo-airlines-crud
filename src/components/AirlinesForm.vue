@@ -22,22 +22,10 @@
       />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.primaryColor.label')" label-for="primary_color">
-      <b-form-input
-        id="primary_color"
-        type="color"
-        v-model="form.primary_color"
-        required
-        :placeholder="$t('airlines.form.primaryColor.placeholder')"
-      />
+      <b-form-input id="primary_color" type="color" v-model="form.primary_color" required />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.secondaryColor.label')" label-for="secondary_color">
-      <b-form-input
-        id="secondary_color"
-        type="color"
-        v-model="form.secondary_color"
-        required
-        :placeholder="$t('airlines.form.secondaryColor.placeholder')"
-      />
+      <b-form-input id="secondary_color" type="color" v-model="form.secondary_color" required />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.services.label')">
       <b-form-checkbox-group id="services" v-model="form.services" name="services">
