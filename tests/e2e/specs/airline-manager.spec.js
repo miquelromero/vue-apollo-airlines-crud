@@ -32,10 +32,10 @@ describe('Airline manager main features', () => {
     cy.get(itemSelector)
       .last()
       .click({ force: true });
-    cy.get('[data-cy=airlines-form-edit-modal]').should('be.visible');
+    cy.get('[data-cy=generic-crud-form-edit-modal]').should('be.visible');
     cy.get('[data-cy=airlines-form-name]').type(nameExtension);
-    cy.get('[data-cy=airlines-form-edit-button]').click();
-    cy.get('[data-cy=airlines-form-edit-modal]').should('not.be.visible');
+    cy.get('[data-cy=generic-crud-form-edit-button]').click();
+    cy.get('[data-cy=generic-crud-form-edit-modal]').should('not.be.visible');
 
     // Validate edit
     cy.get(itemSelector)
@@ -48,9 +48,9 @@ describe('Airline manager main features', () => {
       .last()
       .click({ force: true });
 
-    cy.get('[data-cy=airlines-form-edit-modal]').should('be.visible');
-    cy.get('[data-cy=airlines-form-delete-button]').click({ force: true });
-    cy.get('[data-cy=airlines-form-edit-modal]').should('not.be.visible');
+    cy.get('[data-cy=generic-crud-form-edit-modal]').should('be.visible');
+    cy.get('[data-cy=generic-crud-form-delete-button]').click({ force: true });
+    cy.get('[data-cy=generic-crud-form-edit-modal]').should('not.be.visible');
 
     // Validate delete
     cy.get(itemSelector)

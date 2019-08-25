@@ -4,11 +4,11 @@
       <b-form-input
         id="iata"
         data-cy="airlines-form-iata"
-        v-model="form.iata"
+        :value="form.iata.toUpperCase()"
+        @input="form.iata = $event.toUpperCase()"
         type="text"
         maxlength="2"
         required
-        style="text-transform: uppercase;"
         :placeholder="$t('airlines.form.iata.placeholder')"
       />
     </b-form-group>
@@ -64,6 +64,7 @@ import Color from 'color';
 import services from '@/assets/js/services';
 
 export default {
+  name: 'AirlinesForm',
   data() {
     return {
       services,
@@ -83,7 +84,7 @@ export default {
         const primaryColor = Color(this.item.primary_color);
         const secondaryColor = Color(this.item.secondary_color);
         this.form = {
-          iata: this.item.iata.toUpperCase(),
+          iata: this.item.iata,
           name: this.item.name,
           primary_color: primaryColor.hex(),
           secondary_color: secondaryColor.hex(),

@@ -26,12 +26,12 @@
 
 Cypress.Commands.add('createAirline', (iata, name, services) => {
   cy.get('[data-cy=button-create-airline]').click();
-  cy.get('[data-cy=airlines-form-create-modal]').should('be.visible');
+  cy.get('[data-cy=generic-crud-form-create-modal]').should('be.visible');
   cy.get('[data-cy=airlines-form-iata]').type(iata);
   cy.get('[data-cy=airlines-form-name]').type(name);
   services.forEach(service => {
     cy.get(`[data-cy=airlines-form-service-${service}]`).check({ force: true });
   });
-  cy.get('[data-cy=airlines-form-create-button]').click();
-  cy.get('[data-cy=airlines-form-create-modal]').should('not.be.visible');
+  cy.get('[data-cy=generic-crud-form-create-button]').click();
+  cy.get('[data-cy=generic-crud-form-create-modal]').should('not.be.visible');
 });

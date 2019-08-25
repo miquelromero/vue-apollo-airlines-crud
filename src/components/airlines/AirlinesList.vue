@@ -57,10 +57,11 @@
 </template>
 
 <script>
-import AirlinesItem from '@/components/AirlinesItem.vue';
+import AirlinesItem from '@/components/airlines/AirlinesItem.vue';
 import services from '@/assets/js/services';
 
 export default {
+  name: 'AirlinesList',
   components: {
     AirlinesItem,
   },
@@ -90,9 +91,9 @@ export default {
     },
     filteredAirlines() {
       if (!this.isActiveSearchFilter && !this.isActiveServicesFilter) {
-        return this.airlines;
+        return this.items;
       }
-      return this.airlines.filter(airline => {
+      return this.items.filter(airline => {
         return (
           (!this.isActiveSearchFilter || this.matchesSearch(airline)) &&
           (!this.isActiveServicesFilter || this.matchesServices(airline))
@@ -119,7 +120,7 @@ export default {
     },
   },
   props: {
-    airlines: {
+    items: {
       type: Array,
       required: true,
     },
