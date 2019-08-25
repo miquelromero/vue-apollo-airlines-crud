@@ -2,11 +2,15 @@ import shortid from 'shortid';
 
 export default {
   Query: {
-    airlines: (root, args, { db }) => db.get('airlines').value(),
+    airlines: (root, args, { db }) =>
+      db
+        .get('airlines')
+        .filter({ active: true })
+        .value(),
     airline: (root, { id }, { db }) =>
       db
         .get('airlines')
-        .find({ id })
+        .find({ id, active: true })
         .value(),
   },
   Mutation: {
@@ -18,6 +22,7 @@ export default {
         primary_color: input.primary_color,
         secondary_color: input.secondary_color,
         services: input.services,
+        active: true,
       };
 
       db.get('airlines')
@@ -32,7 +37,7 @@ export default {
     updateAirline: (root, { id, input }, { pubsub, db }) => {
       const airline = db
         .get('airlines')
-        .find({ id })
+        .find({ id, active: true })
         .assign({
           iata: input.iata,
           name: input.name,
@@ -46,6 +51,23 @@ export default {
 
       return airline;
     },
+    deleteAirline: (root, { id }, { pubsub, db }) => {
+      const airline = db.get('airlines').find({ id, active: true });
+
+      if (!airline) {
+        return false;
+      }
+
+      airline
+        .assign({
+          active: false,
+        })
+        .write();
+
+      pubsub.publish('airlineDeleted', { airlineDeleted: id });
+
+      return true;
+    },
   },
   Subscription: {
     airlineAdded: {
@@ -53,6 +75,9 @@ export default {
     },
     airlineUpdated: {
       subscribe: (parent, args, { pubsub }) => pubsub.asyncIterator('airlineUpdated'),
+    },
+    airlineDeleted: {
+      subscribe: (parent, args, { pubsub }) => pubsub.asyncIterator('airlineDeleted'),
     },
   },
 };

@@ -19,6 +19,7 @@ db.defaults({
       primary_color: '#fc0',
       secondary_color: '#666',
       services: [services.checkin.key, services.seats.key],
+      active: true,
     },
     {
       id: shortid.generate(),
@@ -27,6 +28,7 @@ db.defaults({
       primary_color: '#133590',
       secondary_color: '#f1c931',
       services: [services.bags.key, services.seats.key, services.checkin.key],
+      active: true,
     },
   ],
 }).write();

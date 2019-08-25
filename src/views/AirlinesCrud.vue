@@ -6,6 +6,10 @@
         :document="require('../graphql/AirlineAdded.gql')"
         :update-query="onAirlineAdded"
       />
+      <ApolloSubscribeToMore
+        :document="require('../graphql/AirlineDeleted.gql')"
+        :update-query="onAirlineDeleted"
+      />
       <ApolloSubscribeToMore :document="require('../graphql/AirlineUpdated.gql')" />
       <!-- TODO: Use loading instead of isLoading once issue is fixed 
            https://github.com/Akryum/vue-apollo/issues/263 
@@ -32,7 +36,7 @@
           :variables="{
             input: formData,
           }"
-          @done="onSuccess('creation')"
+          @done="onSuccess('create')"
         >
           <template slot-scope="{ mutate }">
             <b-button variant="primary" @click="mutate">{{ $t('crud.createButton') }}</b-button>
@@ -59,12 +63,24 @@
           <airlines-form v-else-if="data" :item="data.airline" @change="formData = $event" />
           <template #modal-footer>
             <ApolloMutation
+              :mutation="require('../graphql/DeleteAirline.gql')"
+              :variables="{
+                id: $route.params.id,
+                input: formData,
+              }"
+              @done="onSuccess('delete')"
+            >
+              <template slot-scope="{ mutate }">
+                <b-button variant="danger" @click="mutate">{{ $t('crud.deleteButton') }}</b-button>
+              </template>
+            </ApolloMutation>
+            <ApolloMutation
               :mutation="require('../graphql/UpdateAirline.gql')"
               :variables="{
                 id: $route.params.id,
                 input: formData,
               }"
-              @done="onSuccess('edition')"
+              @done="onSuccess('update')"
             >
               <template slot-scope="{ mutate }">
                 <b-button variant="primary" @click="mutate">{{ $t('crud.editButton') }}</b-button>
@@ -106,21 +122,24 @@ export default {
       this.$router.push({ name: 'airlines' });
     },
     onSuccess(action) {
-      console.log('onSuccess!!');
-      this.$bvToast.toast(
-        this.$t(action === 'creation' ? 'crud.creationSuccess' : 'crud.editionSuccess'),
-        {
-          title: this.$t('crud.successTitle'),
-          toaster: 'b-toaster-bottom-center',
-          variant: 'success',
-          solid: true,
-        },
-      );
+      this.$bvToast.toast(this.$t(`crud.successToast.text.${action}`), {
+        title: this.$t('crud.successToast.title'),
+        toaster: 'b-toaster-bottom-center',
+        variant: 'success',
+        solid: true,
+      });
       this.closeModal();
     },
     onAirlineAdded(previousResult, { subscriptionData }) {
       return {
         airlines: [...previousResult.airlines, subscriptionData.data.airlineAdded],
+      };
+    },
+    onAirlineDeleted(previousResult, { subscriptionData }) {
+      return {
+        airlines: previousResult.airlines.filter(
+          airline => airline.id !== subscriptionData.data.airlineDeleted,
+        ),
       };
     },
   },

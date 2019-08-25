@@ -23,9 +23,11 @@ type Query {
 type Mutation {
   createAirline(input: AirlineInput!): Airline!
   updateAirline(id: ID!, input: AirlineInput!): Airline!
+  deleteAirline(id: ID!): Boolean!
 }
 
 type Subscription {
   airlineAdded: Airline!
   airlineUpdated: Airline!
+  airlineDeleted: ID!
 }
