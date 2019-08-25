@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar>
+    <b-navbar type="dark" variant="primary">
       <b-navbar-brand :to="{ name: 'airlines' }">{{ $t('title') }}</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
@@ -17,9 +17,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <b-container>
-      <router-view />
-    </b-container>
+    <router-view />
   </div>
 </template>
 

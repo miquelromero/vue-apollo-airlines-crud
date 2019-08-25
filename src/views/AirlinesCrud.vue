@@ -124,7 +124,7 @@ export default {
     onSuccess(action) {
       this.$bvToast.toast(this.$t(`crud.successToast.text.${action}`), {
         title: this.$t('crud.successToast.title'),
-        toaster: 'b-toaster-bottom-center',
+        toaster: 'b-toaster-top-right',
         variant: 'success',
         solid: true,
       });

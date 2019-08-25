@@ -16,6 +16,15 @@
     }
   },
   "airlines": {
+    "filters": {
+      "search": {
+        "placeholder": "Search"
+      },
+      "services": {
+        "header": "Filter by service",
+        "clear": "Clear filter"
+      }
+    },
     "form": {
       "iata": {
         "label": "IATA",
