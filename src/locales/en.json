@@ -32,7 +32,15 @@
       "secondaryColor": {
         "label": "Secondary color",
         "placeholder": "#ffffff"
+      },
+      "services": {
+        "label": "Services"
       }
     }
+  },
+  "services": {
+    "checkin": "Check in",
+    "seats": "Seats",
+    "bags": "Bags"
   }
 }
