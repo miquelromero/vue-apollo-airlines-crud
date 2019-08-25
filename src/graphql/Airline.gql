@@ -1,0 +1,7 @@
+#import "./AirlineFragment.gql"
+
+query airline($id: ID!) {
+  airline(id: $id) {
+    ...Airline
+  }
+}

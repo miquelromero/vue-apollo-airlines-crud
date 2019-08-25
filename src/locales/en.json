@@ -2,6 +2,7 @@
   "title": "Airlines manager",
   "crud": {
     "createButton": "Create",
+    "editButton": "Edit",
     "modalCreateTitle": "Create",
     "modalEditTitle": "Edit",
     "successTitle": "Success!",

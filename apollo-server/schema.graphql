@@ -17,12 +17,15 @@ type Airline {
 
 type Query {
   airlines: [Airline]
+  airline(id: ID!): Airline
 }
 
 type Mutation {
   createAirline(input: AirlineInput!): Airline!
+  updateAirline(id: ID!, input: AirlineInput!): Airline!
 }
 
 type Subscription {
   airlineAdded: Airline!
+  airlineUpdated: Airline!
 }

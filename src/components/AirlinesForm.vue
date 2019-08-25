@@ -50,20 +50,48 @@ export default {
   data() {
     return {
       services,
-      form: {
-        iata: '',
-        name: '',
-        primary_color: '',
-        secondary_color: '',
-        services: [],
-      },
+      form: {},
     };
+  },
+  props: {
+    item: {
+      type: Object,
+      required: false,
+    },
+  },
+  methods: {
+    initData() {
+      if (this.item) {
+        this.form = {
+          iata: this.item.iata,
+          name: this.item.name,
+          primary_color: this.item.primary_color,
+          secondary_color: this.item.secondary_color,
+          services: [...this.item.services],
+        };
+      } else {
+        this.form = {
+          iata: '',
+          name: '',
+          primary_color: '',
+          secondary_color: '',
+          services: [],
+        };
+      }
+    },
   },
   watch: {
     form: {
       deep: true,
       handler(form) {
         this.$emit('change', form);
+      },
+    },
+    item: {
+      deep: true,
+      immediate: true,
+      handler() {
+        this.initData();
       },
     },
   },

@@ -26,6 +26,7 @@ export default new Router({
       name: 'airlines-edit',
       component: AirlinesCrud,
       props: {
+        default: true,
         isEditing: true,
       },
     },

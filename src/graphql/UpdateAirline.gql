@@ -1,0 +1,7 @@
+#import "./AirlineFragment.gql"
+
+mutation updateAirline($id: ID!, $input: AirlineInput!) {
+  updateAirline(id: $id, input: $input) {
+    ...Airline
+  }
+}
