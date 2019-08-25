@@ -1,52 +1,54 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-col md="4">
-        <b-form-input
-          id="search"
-          v-model="search"
-          :placeholder="$t('airlines.filters.search.placeholder')"
-        />
-        <div class="mt-2">
-          <b-card no-body>
-            <template #header>
-              <span>{{ $t('airlines.filters.services.header') }}</span>
-              <b-button
-                class="float-right p-0  text-decoration-none"
-                size="sm"
-                variant="link"
-                v-if="isActiveServicesFilter"
-                @click="clearServicesFilters"
-              >
-                {{ $t('airlines.filters.services.clear') }}
-              </b-button>
-            </template>
-            <b-list-group flush>
-              <b-list-group-item
-                button
-                v-for="service in services"
-                :key="service.key"
-                @click="service.state = !service.state"
-                class="d-flex justify-content-between align-items-center"
-                :variant="isActiveServicesFilter && !service.state ? 'light' : ''"
-                :active="service.state"
-              >
-                <span>
-                  <font-awesome-icon class="mr-1" :icon="service.icon" />
-                  {{ $t(`services.${service.key}`) }}
-                </span>
-              </b-list-group-item>
-            </b-list-group>
-          </b-card>
-        </div>
-      </b-col>
-      <b-col>
-        <b-list-group>
-          <airlines-item v-for="airline in filteredAirlines" :key="airline.id" :airline="airline" />
-        </b-list-group>
-      </b-col>
-    </b-row>
-  </b-container>
+  <b-row>
+    <b-col md="4">
+      <b-button class="mt-3" block :to="{ name: 'airlines-create' }">{{
+        $t('crud.createButton')
+      }}</b-button>
+      <b-form-input
+        class="mt-3"
+        id="search"
+        v-model="search"
+        :placeholder="$t('airlines.filters.search.placeholder')"
+      />
+      <div class="mt-3">
+        <b-card no-body>
+          <template #header>
+            <span>{{ $t('airlines.filters.services.header') }}</span>
+            <b-button
+              class="float-right p-0  text-decoration-none"
+              size="sm"
+              variant="link"
+              v-if="isActiveServicesFilter"
+              @click="clearServicesFilters"
+            >
+              {{ $t('airlines.filters.services.clear') }}
+            </b-button>
+          </template>
+          <b-list-group flush>
+            <b-list-group-item
+              button
+              v-for="service in services"
+              :key="service.key"
+              @click="service.state = !service.state"
+              class="d-flex justify-content-between align-items-center"
+              :variant="isActiveServicesFilter && !service.state ? 'light' : ''"
+              :active="service.state"
+            >
+              <span>
+                <font-awesome-icon class="mr-1" :icon="service.icon" />
+                {{ $t(`services.${service.key}`) }}
+              </span>
+            </b-list-group-item>
+          </b-list-group>
+        </b-card>
+      </div>
+    </b-col>
+    <b-col>
+      <b-list-group class="mt-3">
+        <airlines-item v-for="airline in filteredAirlines" :key="airline.id" :airline="airline" />
+      </b-list-group>
+    </b-col>
+  </b-row>
 </template>
 
 <script>

@@ -1,17 +1,21 @@
 <template>
   <b-form>
-    <b-form-group :label="$t('airlines.form.iata.label')" label-for="input-1">
+    <b-form-group :label="$t('airlines.form.iata.label')" label-for="IATA">
       <b-form-input
         id="iata"
         v-model="form.iata"
         type="text"
+        maxlength="2"
         required
+        style="text-transform: uppercase;"
         :placeholder="$t('airlines.form.iata.placeholder')"
       />
     </b-form-group>
     <b-form-group :label="$t('airlines.form.name.label')" label-for="name">
       <b-form-input
         id="name"
+        type="text"
+        maxlength="50"
         v-model="form.name"
         required
         :placeholder="$t('airlines.form.name.placeholder')"
@@ -42,6 +46,9 @@
         </b-form-checkbox>
       </b-form-checkbox-group>
     </b-form-group>
+    <b-alert :show="updatedByOtherUser" class="mb-0" variant="warning">
+      {{ $t('airlines.form.alerts.updatedByOtherUser') }}
+    </b-alert>
   </b-form>
 </template>
 
@@ -54,6 +61,7 @@ export default {
     return {
       services,
       form: {},
+      updatedByOtherUser: false,
     };
   },
   props: {
@@ -68,7 +76,7 @@ export default {
         const primaryColor = Color(this.item.primary_color);
         const secondaryColor = Color(this.item.secondary_color);
         this.form = {
-          iata: this.item.iata,
+          iata: this.item.iata.toUpperCase(),
           name: this.item.name,
           primary_color: primaryColor.hex(),
           secondary_color: secondaryColor.hex(),
@@ -85,6 +93,17 @@ export default {
       }
     },
   },
+  computed: {
+    isValid() {
+      if (!this.form.iata || this.form.iata.length !== 2) {
+        return false;
+      }
+      if (!this.form.name || this.form.name.length === 0) {
+        return false;
+      }
+      return true;
+    },
+  },
   watch: {
     form: {
       deep: true,
@@ -92,11 +111,20 @@ export default {
         this.$emit('change', form);
       },
     },
+    isValid: {
+      immediate: true,
+      handler(isValid) {
+        this.$emit('validate', isValid);
+      },
+    },
     item: {
       deep: true,
       immediate: true,
-      handler() {
-        this.initData();
+      handler(updatedItem, previousItem) {
+        this.updatedByOtherUser = updatedItem && previousItem && updatedItem.id === previousItem.id;
+        if (!this.updatedByOtherUser) {
+          this.initData();
+        }
       },
     },
   },

@@ -4,7 +4,10 @@
     class="airline-item"
     :style="itemStyle"
   >
-    <span>{{ text }}</span>
+    <div class="item__text">
+      <span class="airline-item__text__iata text-monospace">{{ airline.iata }}</span>
+      <span class="airline-item__text__name">{{ airline.name }}</span>
+    </div>
     <div class="airline-item__badges">
       <b-badge
         class="airline-item__badges__badge"
@@ -30,14 +33,12 @@ export default {
     },
   },
   computed: {
-    text() {
-      return `${this.airline.iata} - ${this.airline.name}`;
-    },
     itemStyle() {
       const primaryColor = Color(this.airline.primary_color);
+      const secondaryColor = Color(this.airline.secondary_color);
       return {
         backgroundColor: primaryColor.hex(),
-        color: primaryColor.isDark() ? 'white' : 'black',
+        color: secondaryColor.hex(),
       };
     },
     badgeStyle() {
@@ -60,6 +61,13 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   &__text {
+    &__iata {
+      margin-left: -20px;
+      padding: 0 20px;
+      font-weight: bold;
+    }
+    &__name {
+    }
   }
   &__badges {
     &__badge {
@@ -69,8 +77,17 @@ export default {
       }
     }
   }
-  &:hover {
-    filter: brightness(1.2);
+  &:not(:hover) {
+    color: black !important;
+    background-color: white !important;
+    .airline-item {
+      &__badges {
+        &__badge {
+          color: white !important;
+          background-color: #6c757d !important;
+        }
+      }
+    }
   }
 }
 </style>

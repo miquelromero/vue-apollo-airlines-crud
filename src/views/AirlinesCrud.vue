@@ -1,6 +1,5 @@
 <template>
   <div>
-    <b-button :to="{ name: 'airlines-create' }">{{ $t('crud.createButton') }}</b-button>
     <ApolloQuery :query="require('../graphql/Airlines.gql')">
       <ApolloSubscribeToMore
         :document="require('../graphql/AirlineAdded.gql')"
@@ -15,11 +14,13 @@
            https://github.com/Akryum/vue-apollo/issues/263 
       -->
       <template slot-scope="{ result: { loading, error, data }, isLoading }">
-        <div v-if="loading || isLoading" class="text-center">
-          <b-spinner label="Spinning"></b-spinner>
+        <div v-if="loading || isLoading" class="text-center mt-3">
+          <b-spinner />
         </div>
-        <div v-else-if="error">An error occured</div>
-        <airlines-list v-else-if="data" :airlines="data.airlines" />
+        <b-alert :show="!!error" class="mt-3" variant="danger">
+          {{ $t('errors.generic') }}
+        </b-alert>
+        <airlines-list v-if="data && data.airlines" :airlines="data.airlines" />
       </template>
     </ApolloQuery>
     <b-modal
@@ -28,7 +29,7 @@
       :visible="isCreating"
       :title="$t('crud.modalCreateTitle')"
     >
-      <airlines-form @change="formData = $event" />
+      <airlines-form @change="formData = $event" @validate="validFormData = $event" />
       <template #modal-footer>
         <ApolloMutation
           v-if="isCreating"
@@ -37,9 +38,12 @@
             input: formData,
           }"
           @done="onSuccess('create')"
+          @error="onError('create')"
         >
-          <template slot-scope="{ mutate }">
-            <b-button variant="primary" @click="mutate">{{ $t('crud.createButton') }}</b-button>
+          <template slot-scope="{ mutate, loading }">
+            <b-button variant="primary" :disabled="!validFormData || loading" @click="mutate">{{
+              $t('crud.createButton')
+            }}</b-button>
           </template>
         </ApolloMutation>
       </template>
@@ -59,8 +63,12 @@
           <div v-if="loading || isLoading" class="text-center">
             <b-spinner label="Spinning"></b-spinner>
           </div>
-          <div v-else-if="error">An error occured</div>
-          <airlines-form v-else-if="data" :item="data.airline" @change="formData = $event" />
+          <airlines-form
+            v-if="data && data.airline"
+            :item="data.airline"
+            @change="formData = $event"
+            @validate="validFormData = $event"
+          />
           <template #modal-footer>
             <ApolloMutation
               :mutation="require('../graphql/DeleteAirline.gql')"
@@ -69,9 +77,12 @@
                 input: formData,
               }"
               @done="onSuccess('delete')"
+              @error="onError('delete')"
             >
               <template slot-scope="{ mutate }">
-                <b-button variant="danger" @click="mutate">{{ $t('crud.deleteButton') }}</b-button>
+                <b-button :disabled="!data || !data.airline" variant="danger" @click="mutate">{{
+                  $t('crud.deleteButton')
+                }}</b-button>
               </template>
             </ApolloMutation>
             <ApolloMutation
@@ -81,9 +92,12 @@
                 input: formData,
               }"
               @done="onSuccess('update')"
+              @error="onError('update')"
             >
               <template slot-scope="{ mutate }">
-                <b-button variant="primary" @click="mutate">{{ $t('crud.editButton') }}</b-button>
+                <b-button variant="primary" @click="mutate" :disabled="!validFormData">{{
+                  $t('crud.updateButton')
+                }}</b-button>
               </template>
             </ApolloMutation>
           </template>
@@ -105,6 +119,7 @@ export default {
   data() {
     return {
       formData: {},
+      validFormData: undefined,
     };
   },
   props: {
@@ -124,11 +139,19 @@ export default {
     onSuccess(action) {
       this.$bvToast.toast(this.$t(`crud.successToast.text.${action}`), {
         title: this.$t('crud.successToast.title'),
-        toaster: 'b-toaster-top-right',
+        toaster: 'b-toaster-bottom-center',
         variant: 'success',
         solid: true,
       });
       this.closeModal();
+    },
+    onError(action) {
+      this.$bvToast.toast(this.$t(`crud.errorToast.text.${action}`), {
+        title: this.$t('crud.errorToast.title'),
+        toaster: 'b-toaster-bottom-center',
+        variant: 'danger',
+        solid: true,
+      });
     },
     onAirlineAdded(previousResult, { subscriptionData }) {
       return {
