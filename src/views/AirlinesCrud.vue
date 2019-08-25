@@ -41,9 +41,12 @@
           @error="onError('create')"
         >
           <template slot-scope="{ mutate, loading }">
-            <b-button variant="primary" :disabled="!validFormData || loading" @click="mutate">{{
-              $t('crud.createButton')
-            }}</b-button>
+            <b-button
+              variant="primary"
+              :disabled="!validFormData || loading"
+              @click="mutate"
+              v-text="$t('crud.createButton')"
+            />
           </template>
         </ApolloMutation>
       </template>
@@ -79,10 +82,13 @@
               @done="onSuccess('delete')"
               @error="onError('delete')"
             >
-              <template slot-scope="{ mutate }">
-                <b-button :disabled="!data || !data.airline" variant="danger" @click="mutate">{{
-                  $t('crud.deleteButton')
-                }}</b-button>
+              <template slot-scope="{ mutate, loading }">
+                <b-button
+                  :disabled="!data || !data.airline || loading"
+                  variant="danger"
+                  @click="mutate"
+                  v-text="$t('crud.deleteButton')"
+                />
               </template>
             </ApolloMutation>
             <ApolloMutation
@@ -94,10 +100,13 @@
               @done="onSuccess('update')"
               @error="onError('update')"
             >
-              <template slot-scope="{ mutate }">
-                <b-button variant="primary" @click="mutate" :disabled="!validFormData">{{
-                  $t('crud.updateButton')
-                }}</b-button>
+              <template slot-scope="{ mutate, loading }">
+                <b-button
+                  variant="primary"
+                  @click="mutate"
+                  :disabled="!validFormData || loading"
+                  v-text="$t('crud.updateButton')"
+                />
               </template>
             </ApolloMutation>
           </template>

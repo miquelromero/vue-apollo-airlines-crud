@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col md="4">
-      <b-button class="mt-3" block :to="{ name: 'airlines-create' }">{{
+      <b-button variant="primary" class="mt-3" block :to="{ name: 'airlines-create' }">{{
         $t('crud.createButton')
       }}</b-button>
       <b-form-input
